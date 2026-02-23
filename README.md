@@ -29,7 +29,9 @@ Yorl (Do not contact)
 DataFromBelow (Do not contact)
 
 # Version History
-
+- 0.1.1
+  - goals added
+  - 
 - 0.1
   - Initial Release
 
@@ -39,3 +41,16 @@ Depends on the amount of caffeine present.
 
 ## Is this a serious project?
 Yes, but humor is important for morale.
+
+# Current Goals
+- combat ID = "BRnum"
+- Load datasource
+  - datasource is excel file
+  - there are two excel arks
+- see url's in loaded pdf (maybe use head for now)
+- try request to get response code 200 + exception and finally
+  - success leaves "success"
+  - failure leaves "404 not found"
+- save downloaded pdf in path
+- repeat for some amount of times
+  -    do not kill entire network
