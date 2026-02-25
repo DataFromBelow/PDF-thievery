@@ -54,10 +54,10 @@ Yes, but humor is important for morale.
 # Current Goals
 - Take apart task for ease of logic
   - Downloader
+    - download path
   - Pdf reader
     - Column and row reader 
     - Address finder
-    - 
 - try to simply print a line from test-data.pdf
   - try to print and then use as url input
 - combat ID = "BRnum"
