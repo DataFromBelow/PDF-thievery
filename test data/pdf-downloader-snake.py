@@ -48,27 +48,28 @@ for j in range(len(df)):
         print("critical failure")
     finally:
         pass
-
+    
     if type(url_link) is float:
         print("Nan")
         pass
-    elif type(url_link) is str:
-        print(url_link)
+    elif type(url_link) is str and os.path.exists(f"{output_path}/{file_name}.pdf") == False:
+        #print(url_link)
         try: #I know what i need to do. Use os to scan if the file is there already
             #if :
             #else:
             response = requests.get(url_link, allow_redirects=True)
-            if response.status_code == 200:
+            mime_type = str(response.headers.get("Content-Type"))
+            if response.status_code == 200 and mime_type == "application/pdf":
                 #os.path and os goes here
                 # this is where you'd take data and store as a pdf in output path
                 #print("200")
-                print(f"200 : {file_name} : Success")
+                print(f"200 : {file_name} / ({mime_type}): Success")
                 #grab the contents
                 save_file = str(file_name + ".pdf")
                 save_dest = os.path.join(output_path, save_file)
                 #save response.content
                 try:
-                    with open(save_dest, "wb") as file: #Has decided to download insists on downloading html for some goddamn reason??????
+                    with open(save_dest, "wb") as file: 
                         file.write(response.content)
                 except:
                     print(f"Unknown Failure: {save_file}")
@@ -76,14 +77,15 @@ for j in range(len(df)):
                 print(f"404 : {file_name} : {url_link}")
                 #write in excel file that link is 404
             else:
-                print(f"Failure : {response.status_code}")
+                print(f"Failure / Not PDF")
                 pass
             pass
         except:
             print(f"exception: {url_link} invalid url")
             pass
     else:
-        print("fail")
+        pass
+        # print("fail")
     
 
 # function for filtering rows with no url's
@@ -93,6 +95,7 @@ for j in range(len(df)):
 # duplicate check
 # not sure how to check that
 duplicate_check = ""
+
 
 
 
