@@ -57,7 +57,7 @@ for j in range(len(df)):
         try: #I know what i need to do. Use os to scan if the file is there already
             #if :
             #else:
-            response = requests.get(url_link)
+            response = requests.get(url_link, allow_redirects=True)
             if response.status_code == 200:
                 #os.path and os goes here
                 # this is where you'd take data and store as a pdf in output path
@@ -68,10 +68,10 @@ for j in range(len(df)):
                 save_dest = os.path.join(output_path, save_file)
                 #save response.content
                 try:
-                    with open(save_dest, "wb") as file:
+                    with open(save_dest, "wb") as file: #Has decided to download insists on downloading html for some goddamn reason??????
                         file.write(response.content)
                 except:
-                    print("Unknown Failure: write incomplete")
+                    print(f"Unknown Failure: {save_file}")
             elif response.status_code == 404:
                 print(f"404 : {file_name} : {url_link}")
                 #write in excel file that link is 404
@@ -86,10 +86,6 @@ for j in range(len(df)):
         print("fail")
     
 
-
-
-
-
 # function for filtering rows with no url's
 # function goes here
 
@@ -97,6 +93,7 @@ for j in range(len(df)):
 # duplicate check
 # not sure how to check that
 duplicate_check = ""
+
 
 
 
