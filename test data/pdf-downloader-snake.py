@@ -4,7 +4,6 @@ Created on Monday Feb 23 2026
 @author yorl
 """
 
-
 import os
 import os.path
 import wget
@@ -21,12 +20,15 @@ dwn_url = ""
 # This is the input file path for the excel file containing the url's 
 input_path = "C:/Users/SPAC-49/Documents/Specialisterne/Softwareudvikling/Uge 4/test data/test-data.xlsx"
 
+# This is the output file path 
+output_path = "C:/Users/SPAC-49/Documents/Specialisterne/Softwareudvikling/Uge 4/test data/output"
+
 ID = "BRnum"
 
 try:
     df = pd.read_excel(input_path, sheet_name=0)
     #print(df)
-    print(df["Pdf_URL"][2])
+    #print(df["Pdf_URL"][2])
 except:
     print("GODDAMNIT")
 finally:
@@ -36,9 +38,6 @@ finally:
 
 
 
-# This is the output file path 
-output_path = "output/"
-
 for j in range(len(df)):
     
     try:
@@ -46,7 +45,7 @@ for j in range(len(df)):
         url_link = df["Pdf_URL"][j]
         #print(file_name + ".pdf")
     except:
-        print("lol")
+        print("critical failure")
     finally:
         pass
 
@@ -55,19 +54,29 @@ for j in range(len(df)):
         pass
     elif type(url_link) is str:
         print(url_link)
-        try:
-            if :
-            else:
-                response = requests.get(url_link)
+        try: #I know what i need to do. Use os to scan if the file is there already
+            #if :
+            #else:
+            response = requests.get(url_link)
             if response.status_code == 200:
                 #os.path and os goes here
                 # this is where you'd take data and store as a pdf in output path
                 #print("200")
                 print(f"200 : {file_name} : Success")
-            elif:
+                #grab the contents
+                save_file = str(file_name + ".pdf")
+                save_dest = os.path.join(output_path, save_file)
+                #save response.content
+                try:
+                    with open(save_dest, "wb") as file:
+                        file.write(response.content)
+                except:
+                    print("Unknown Failure: write incomplete")
+            elif response.status_code == 404:
                 print(f"404 : {file_name} : {url_link}")
                 #write in excel file that link is 404
             else:
+                print(f"Failure : {response.status_code}")
                 pass
             pass
         except:
@@ -79,6 +88,8 @@ for j in range(len(df)):
 
 
 
+
+
 # function for filtering rows with no url's
 # function goes here
 
@@ -86,6 +97,8 @@ for j in range(len(df)):
 # duplicate check
 # not sure how to check that
 duplicate_check = ""
+
+
 
 
 
