@@ -30,6 +30,8 @@ Yorl (Do not contact)
 DataFromBelow (Do not contact)
 
 # Version History
+- 1.1.1
+  - Works, although not pretty
 - 0.1.4
   - test data added
   - new goals added
