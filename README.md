@@ -2,21 +2,22 @@
 This will be a pdf downloader, hopefully.
 
 ## Please enjoy
-This is meant to become a pdf-downloader of a sort. 
+This is meant to become a pdf-downloader that is given a specific Excel sheet. 
 
 
 ## Getting Started
 ### Dependencies
 - Python
 - World Wide Web Connection
-- Openpyxl
-- excel
+- Pandas
+  - Openpyxl
+- Excel sheets
 
 ### Installing
 You pip install openpyxl or none of this works for some reason.
 
 ### Executing Program
-
+Currently, it is commandline.
 
 ## Known Issues
 - I am the dev, which is a known issue.
