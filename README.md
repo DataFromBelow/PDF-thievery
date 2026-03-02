@@ -14,10 +14,10 @@ This is meant to become a pdf-downloader that is given a specific Excel sheet.
 - Excel sheets
 
 ### Installing
-You pip install openpyxl or none of this works for some reason.
+You must pip install all of the dependencies or none of this works.
 
 ### Executing Program
-Currently, it is commandline.
+Currently, it is activated as commandline and cannot take keywords arguments.
 
 ## Known Issues
 - I am the dev, which is a known issue.
