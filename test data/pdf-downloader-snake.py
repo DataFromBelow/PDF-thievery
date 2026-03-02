@@ -6,31 +6,24 @@ Created on Monday Feb 23 2026
 
 import os
 import os.path
-#import wget
 import pandas as pd
-#import numpy as np
-#import requests
-#import glob
-
+import requests
 
 
 # This is the input file path for the excel file containing the url's 
-input_path = "C:/Users/Spac-43/Desktop/magnus_pdf_downloader/input/GRI_2017_2020"
+input_path = "C:/Users/Spac-43/Documents/GitHub/PDF-thievery/test data/test-data.xlsx"
 
 # This is the output file path 
-output_path = "C:/Users/Spac-43/Desktop/magnus_pdf_downloader/output"
+output_path = "C:/Users/Spac-43/Documents/GitHub/PDF-thievery/test data/output"
 
 # ID = "BRnum"
 
 try: # Checks if the list has even loaded
     df = pd.read_excel(input_path, sheet_name=0)
-    #print(df)
-    #print(df["Pdf_URL"][2])
 except:
     print("GODDAMNIT")
 finally:
     print("test ended")
-
 
 
 for j in range(len(df)):
@@ -67,24 +60,3 @@ for j in range(len(df)):
         pass
         # print("fail")
     
-
-#testing area
-
-#    try:
-#        file_name = df["BRnum"][j]
-#        url_link = df["Pdf_URL"][j]
-#        #print(file_name + ".pdf")
-#    except:
-#        print("critical failure")
-#    finally:
-#        pass
-
-# function for filtering rows with no url's
-# function goes here
-
-# we gotta check if it has already been downloaded
-# duplicate check
-# not sure how to check that
-#duplicate_check = ""
-
-
