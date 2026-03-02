@@ -9,16 +9,16 @@ import os.path
 #import wget
 import pandas as pd
 #import numpy as np
-import requests
+#import requests
 #import glob
 
 
 
 # This is the input file path for the excel file containing the url's 
-input_path = "C:/Users/SPAC-49/Documents/Specialisterne/Softwareudvikling/Uge 4/test data/test-data.xlsx"
+input_path = "C:/Users/Spac-43/Desktop/magnus_pdf_downloader/input/GRI_2017_2020"
 
 # This is the output file path 
-output_path = "C:/Users/SPAC-49/Documents/Specialisterne/Softwareudvikling/Uge 4/test data/output"
+output_path = "C:/Users/Spac-43/Desktop/magnus_pdf_downloader/output"
 
 # ID = "BRnum"
 
