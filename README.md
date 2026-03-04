@@ -9,8 +9,11 @@ This is meant to become a pdf-downloader that is given a specific Excel sheet.
 ### Dependencies
 - Python
 - World Wide Web Connection
+- os
+- os.path
 - Pandas
   - Openpyxl
+- Requests
 - Excel sheets
 
 ### Installing
