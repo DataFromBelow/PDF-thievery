@@ -1,65 +1,67 @@
 """
 Created on Monday Feb 23 2026
-
 @author yorl
 """
-
 import os
 import os.path
 import pandas as pd
 import requests
 
-
-# This is the input file path for the excel file containing the url's 
+# File paths
 input_path = "C:/Users/Spac-43/Documents/GitHub/PDF-thievery/test data/test-data.xlsx"
-
-# This is the output file path 
 output_path = "C:/Users/Spac-43/Documents/GitHub/PDF-thievery/test data/output"
 
-# ID = "BRnum"
+# Column names
+ID_COL = "BRnum"
+URL_COL = "Pdf_URL"
+
 def main():
-    try: # Checks if the list has even loaded
+    # Load Excel file
+    try:
         df = pd.read_excel(input_path, sheet_name=0)
-    except:
-        print("GODDAMNIT")
-    finally:
-        print("test ended")
+        print("Excel file loaded successfully")
+    except FileNotFoundError:
+        print(f"Excel file not found: {input_path}")
+        return
+    except Exception as e:
+        print(f"Failed to load Excel file: {e}")
+        return
 
-
+    # Loop through each row
     for j in range(len(df)):
-        file_name = df["BRnum"][j]
-        url_link = df["Pdf_URL"][j]
-        if type(url_link) is float: # Solves NaN as a problem
-            print("NaN")
-            pass
-        elif type(url_link) is str and os.path.exists(f"{output_path}/{file_name}.pdf") == False: # checks for url_link and the file not existing, does not overwrite files
-            #print(url_link) # error checking
-            try: 
-                response = requests.get(url_link, allow_redirects=True)
-                mime_type = str(response.headers.get("Content-Type"))
-                if response.status_code == 200 and mime_type == "application/pdf": # checks for response code 200 and mime type application/pdf 
-                    print(f"200 : {file_name} / ({mime_type}): Success")
-                    save_file = str(file_name + ".pdf")
-                    save_dest = os.path.join(output_path, save_file)
-                    try:
-                        with open(save_dest, "wb") as file: #grab the contents
-                            file.write(response.content) #save response.content
-                    except:
-                        print(f"Unknown Failure: {save_file}")
-                elif response.status_code == 404:
-                    print(f"404 : {file_name} : {url_link}")
-                    #write in excel file that link is 404
-                else:
-                    print(f"Failure / Not PDF")
-                    pass
-                pass
-            except:
-                print(f"exception: {url_link} invalid url")
-                pass
-        else:
-            pass
-            #print("fail")
-    
-if __name__ == "__main__": 
+        file_name = df[ID_COL][j]
+        url_link = df[URL_COL][j]
+
+        # Skip rows with no URL
+        if type(url_link) is float:
+            print(f"Skipping {file_name}: no URL")
+            continue
+
+        # Skip if file already exists
+        if os.path.exists(f"{output_path}/{file_name}.pdf"):
+            print(f"Skipping {file_name}: already downloaded")
+            continue
+
+        # Attempt download
+        try:
+            response = requests.get(url_link, allow_redirects=True)
+            mime_type = response.headers.get("Content-Type", "")
+
+            if response.status_code == 200 and mime_type == "application/pdf":
+                save_dest = os.path.join(output_path, file_name + ".pdf")
+                try:
+                    with open(save_dest, "wb") as file:
+                        file.write(response.content)
+                    print(f"Success: {file_name}")
+                except Exception as e:
+                    print(f"Failed to save {file_name}: {e}")
+            elif response.status_code == 404:
+                print(f"404 Not Found: {file_name} - {url_link}")
+            else:
+                print(f"Failed - status {response.status_code}, type {mime_type}: {file_name}")
+
+        except Exception as e:
+            print(f"Exception for {url_link}: {e}")
+
+if __name__ == "__main__":
     main()
-    
