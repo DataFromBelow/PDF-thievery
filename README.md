@@ -36,6 +36,8 @@ DataFromBelow (Do not contact)
 Uncharted95
 
 # Version History
+- 1.2.1
+  - Major changes
 - 1.1.1
   - Works, although not pretty
 - 0.1.4
